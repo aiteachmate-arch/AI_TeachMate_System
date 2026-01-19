@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI TeachMate - Revolutionary AI-Powered Learning Platform</title>
+    <meta name="description" content="AI TeachMate brings personalized, interactive learning to every student with AI-powered avatars, voice interaction, and adaptive content for Classes 5-10.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,22 +16,29 @@
         }
 
         :root {
-            --primary: #667eea;
-            --primary-dark: #764ba2;
-            --accent: #00d4ff;
-            --success: #4ade80;
-            --bg-dark: #1a1a2e;
-            --bg-medium: #16213e;
-            --text-light: #ffffff;
-            --text-secondary: #a0aec0;
+            --primary: 250, 87%, 68%;
+            --primary-dark: 263, 70%, 50%;
+            --accent: 186, 100%, 50%;
+            --accent-glow: 186, 100%, 70%;
+            --success: 142, 71%, 45%;
+            --bg-dark: 240, 21%, 11%;
+            --bg-medium: 225, 44%, 13%;
+            --bg-card: 225, 44%, 16%;
+            --text-light: 0, 0%, 100%;
+            --text-secondary: 215, 20%, 65%;
+            --border-color: 250, 87%, 68%, 0.2;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: var(--text-light);
-            background: var(--bg-dark);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: hsl(var(--text-light));
+            background: hsl(var(--bg-dark));
             overflow-x: hidden;
             line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
         }
 
         /* Animated Background */
@@ -38,21 +49,88 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-medium) 100%);
+            background: linear-gradient(135deg, hsl(var(--bg-dark)) 0%, hsl(var(--bg-medium)) 100%);
+            overflow: hidden;
         }
 
-        .animated-bg::before {
-            content: '';
+        .orb {
             position: absolute;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
-            animation: pulse 15s ease-in-out infinite;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: float 20s ease-in-out infinite;
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: translate(-25%, -25%) scale(1); }
-            50% { transform: translate(-25%, -25%) scale(1.1); }
+        .orb-1 {
+            width: 600px;
+            height: 600px;
+            background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-dark)) 100%);
+            top: -200px;
+            right: -200px;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, hsl(var(--accent)) 0%, hsl(186, 100%, 40%) 100%);
+            bottom: -150px;
+            left: -150px;
+            animation-delay: -7s;
+        }
+
+        .orb-3 {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, hsl(var(--primary-dark)) 0%, hsl(var(--accent)) 100%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: -14s;
+        }
+
+        .grid-overlay {
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(hsla(var(--primary), 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, hsla(var(--primary), 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(30px, -30px) scale(1.05); }
+            50% { transform: translate(-20px, 20px) scale(0.95); }
+            75% { transform: translate(-30px, -20px) scale(1.02); }
+        }
+
+        /* Glass morphism */
+        .glass {
+            background: hsla(var(--bg-card), 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid hsla(var(--primary), 0.15);
+        }
+
+        .glass-strong {
+            background: hsla(var(--bg-dark), 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid hsla(var(--primary), 0.2);
+        }
+
+        /* Gradient text */
+        .text-gradient {
+            background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .text-gradient-accent {
+            background: linear-gradient(135deg, hsl(var(--accent)) 0%, hsl(var(--accent-glow)) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         /* Header */
@@ -61,10 +139,15 @@
             top: 0;
             width: 100%;
             padding: 20px 50px;
-            background: rgba(26, 26, 46, 0.95);
-            backdrop-filter: blur(10px);
             z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 12px 50px;
+            background: hsla(var(--bg-dark), 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid hsla(var(--primary), 0.2);
         }
 
         nav {
@@ -76,47 +159,95 @@
         }
 
         .logo {
+            font-family: 'Space Grotesk', sans-serif;
             font-size: 28px;
             font-weight: bold;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 20px hsla(var(--primary), 0.4);
         }
 
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 40px;
             list-style: none;
         }
 
         .nav-links a {
-            color: var(--text-light);
+            color: hsla(var(--text-light), 0.8);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s;
+            font-size: 15px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)));
+            transition: width 0.3s;
         }
 
         .nav-links a:hover {
-            color: var(--accent);
+            color: hsl(var(--text-light));
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         .cta-btn {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-dark)) 100%);
             color: white;
-            padding: 12px 30px;
+            padding: 12px 28px;
             border-radius: 30px;
             text-decoration: none;
-            font-weight: bold;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px hsla(var(--primary), 0.4);
+            border: none;
+            cursor: pointer;
         }
 
         .cta-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(102, 126, 234, 0.6);
+            box-shadow: 0 8px 30px hsla(var(--primary), 0.5);
+        }
+
+        /* Mobile menu */
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .mobile-menu-btn span {
+            width: 25px;
+            height: 2px;
+            background: hsl(var(--text-light));
+            transition: all 0.3s;
         }
 
         /* Hero Section */
@@ -125,246 +256,529 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 120px 50px 50px;
-            text-align: center;
+            padding: 140px 50px 80px;
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
         }
 
         .hero-content {
-            max-width: 900px;
+            max-width: 600px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: hsla(var(--primary), 0.15);
+            border: 1px solid hsla(var(--primary), 0.3);
+            border-radius: 30px;
+            font-size: 14px;
+            color: hsl(var(--accent));
+            margin-bottom: 24px;
+        }
+
+        .hero-badge span {
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
 
         .hero h1 {
-            font-size: 60px;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: fadeInUp 0.8s ease-out;
+            font-size: 64px;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            font-weight: 700;
         }
 
         .hero p {
-            font-size: 24px;
-            color: var(--text-secondary);
+            font-size: 20px;
+            color: hsl(var(--text-secondary));
             margin-bottom: 40px;
-            animation: fadeInUp 1s ease-out;
+            line-height: 1.7;
         }
 
         .hero-buttons {
             display: flex;
-            gap: 20px;
-            justify-content: center;
+            gap: 16px;
             flex-wrap: wrap;
-            animation: fadeInUp 1.2s ease-out;
         }
 
         .primary-btn {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-dark)) 100%);
             color: white;
-            padding: 18px 40px;
-            border-radius: 30px;
+            padding: 18px 36px;
+            border-radius: 14px;
             text-decoration: none;
-            font-weight: bold;
-            font-size: 18px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 25px hsla(var(--primary), 0.4);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: none;
+            cursor: pointer;
         }
 
         .primary-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.6);
+            box-shadow: 0 8px 35px hsla(var(--primary), 0.5);
         }
 
         .secondary-btn {
-            background: transparent;
+            background: hsla(var(--bg-card), 0.6);
             color: white;
-            padding: 18px 40px;
-            border: 2px solid var(--accent);
-            border-radius: 30px;
+            padding: 18px 36px;
+            border: 1px solid hsla(var(--accent), 0.4);
+            border-radius: 14px;
             text-decoration: none;
-            font-weight: bold;
-            font-size: 18px;
+            font-weight: 600;
+            font-size: 16px;
             transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
         }
 
         .secondary-btn:hover {
-            background: var(--accent);
-            color: var(--bg-dark);
+            background: hsla(var(--accent), 0.1);
+            border-color: hsl(var(--accent));
             transform: translateY(-3px);
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* Hero Visual */
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        /* Features Section */
-        .features {
-            padding: 100px 50px;
-            max-width: 1400px;
-            margin: 0 auto;
+        .hero-card {
+            background: hsla(var(--bg-card), 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid hsla(var(--primary), 0.2);
+            border-radius: 24px;
+            padding: 32px;
+            width: 100%;
+            max-width: 480px;
+            box-shadow: 0 25px 80px hsla(0, 0%, 0%, 0.4);
         }
 
-        .section-title {
+        .avatar-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .avatar-circle {
+            width: 140px;
+            height: 140px;
+            background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            box-shadow: 0 0 60px hsla(var(--primary), 0.5);
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 60px hsla(var(--primary), 0.5); }
+            50% { box-shadow: 0 0 80px hsla(var(--accent), 0.6); }
+        }
+
+        .speaking-indicator {
+            display: flex;
+            gap: 4px;
+            align-items: flex-end;
+            height: 24px;
+        }
+
+        .speaking-bar {
+            width: 4px;
+            background: linear-gradient(to top, hsl(var(--primary)), hsl(var(--accent)));
+            border-radius: 2px;
+            animation: speak 1s ease-in-out infinite;
+        }
+
+        .speaking-bar:nth-child(1) { animation-delay: 0s; height: 8px; }
+        .speaking-bar:nth-child(2) { animation-delay: 0.1s; height: 16px; }
+        .speaking-bar:nth-child(3) { animation-delay: 0.2s; height: 24px; }
+        .speaking-bar:nth-child(4) { animation-delay: 0.3s; height: 16px; }
+        .speaking-bar:nth-child(5) { animation-delay: 0.4s; height: 8px; }
+
+        @keyframes speak {
+            0%, 100% { transform: scaleY(0.5); }
+            50% { transform: scaleY(1); }
+        }
+
+        .topic-display {
             text-align: center;
-            font-size: 48px;
-            margin-bottom: 60px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
 
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
+        .topic-display p {
+            font-size: 14px;
+            color: hsl(var(--text-secondary));
+            margin-bottom: 8px;
         }
 
-        .feature-card {
-            background: rgba(22, 33, 62, 0.6);
-            padding: 40px;
-            border-radius: 20px;
-            border: 1px solid rgba(102, 126, 234, 0.2);
-            transition: all 0.3s;
+        .topic-display h3 {
+            font-size: 20px;
+            color: hsl(var(--accent));
+        }
+
+        .chat-bubble {
+            background: hsla(var(--primary), 0.15);
+            border: 1px solid hsla(var(--primary), 0.3);
+            border-radius: 16px;
+            padding: 16px 20px;
+            width: 100%;
+        }
+
+        .chat-bubble p {
+            font-size: 14px;
+            color: hsl(var(--text-secondary));
+            line-height: 1.6;
+        }
+
+        .floating-card {
+            position: absolute;
+            background: hsla(var(--bg-card), 0.9);
             backdrop-filter: blur(10px);
+            border: 1px solid hsla(var(--primary), 0.2);
+            border-radius: 12px;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            box-shadow: 0 10px 40px hsla(0, 0%, 0%, 0.3);
+            animation: float-card 6s ease-in-out infinite;
         }
 
-        .feature-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent);
-            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.3);
+        .floating-card-1 {
+            top: 20px;
+            right: -20px;
+            animation-delay: 0s;
         }
 
-        .feature-icon {
-            font-size: 50px;
-            margin-bottom: 20px;
+        .floating-card-2 {
+            bottom: 40px;
+            left: -30px;
+            animation-delay: -2s;
         }
 
-        .feature-card h3 {
-            font-size: 24px;
-            margin-bottom: 15px;
-            color: var(--accent);
+        .floating-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
         }
 
-        .feature-card p {
-            color: var(--text-secondary);
-            line-height: 1.8;
+        @keyframes float-card {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
         /* Stats Section */
         .stats {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             padding: 80px 50px;
-            margin: 100px 0;
+            background: linear-gradient(135deg, hsla(var(--primary), 0.15) 0%, hsla(var(--accent), 0.1) 100%);
+            border-top: 1px solid hsla(var(--primary), 0.1);
+            border-bottom: 1px solid hsla(var(--primary), 0.1);
         }
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 40px;
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
+        }
+
+        .stat-item {
             text-align: center;
+            padding: 24px;
+        }
+
+        .stat-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, hsla(var(--primary), 0.2) 0%, hsla(var(--accent), 0.2) 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin: 0 auto 16px;
         }
 
         .stat-item h3 {
-            font-size: 48px;
-            margin-bottom: 10px;
-            color: var(--accent);
+            font-size: 42px;
+            margin-bottom: 8px;
+            font-weight: 700;
         }
 
         .stat-item p {
-            font-size: 18px;
-            opacity: 0.9;
+            font-size: 16px;
+            color: hsl(var(--text-secondary));
         }
 
-        /* How It Works */
-        .how-it-works {
-            padding: 100px 50px;
+        /* Section Styles */
+        .section {
+            padding: 120px 50px;
             max-width: 1400px;
             margin: 0 auto;
         }
 
-        .steps {
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 80px;
+        }
+
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: hsla(var(--primary), 0.1);
+            border: 1px solid hsla(var(--primary), 0.2);
+            border-radius: 30px;
+            font-size: 14px;
+            color: hsl(var(--accent));
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .section-desc {
+            font-size: 18px;
+            color: hsl(var(--text-secondary));
+            line-height: 1.7;
+        }
+
+        /* Features Grid */
+        .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: hsla(var(--bg-card), 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid hsla(var(--primary), 0.15);
+            padding: 36px;
+            border-radius: 24px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: hsla(var(--accent), 0.4);
+            box-shadow: 0 20px 60px hsla(var(--primary), 0.2);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, hsla(var(--primary), 0.2) 0%, hsla(var(--accent), 0.2) 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin-bottom: 24px;
+        }
+
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+            color: hsl(var(--text-light));
+        }
+
+        .feature-card p {
+            color: hsl(var(--text-secondary));
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        /* How It Works */
+        .steps-container {
+            position: relative;
+        }
+
+        .steps-line {
+            position: absolute;
+            top: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70%;
+            height: 4px;
+            background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)));
+            border-radius: 2px;
+            opacity: 0.3;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
             gap: 40px;
-            margin-top: 60px;
+            position: relative;
+            z-index: 1;
         }
 
         .step {
             text-align: center;
-            position: relative;
         }
 
         .step-number {
             width: 80px;
             height: 80px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
+            background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 36px;
+            font-size: 32px;
             font-weight: bold;
-            margin: 0 auto 20px;
-            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+            margin: 0 auto 24px;
+            box-shadow: 0 8px 30px hsla(var(--primary), 0.4);
+            position: relative;
+        }
+
+        .step-number::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 2px solid hsla(var(--accent), 0.3);
+            animation: pulse-ring 2s ease-out infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.3); opacity: 0; }
+        }
+
+        .step-content {
+            background: hsla(var(--bg-card), 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid hsla(var(--primary), 0.15);
+            padding: 28px;
+            border-radius: 20px;
         }
 
         .step h3 {
-            font-size: 22px;
-            margin-bottom: 15px;
-            color: var(--accent);
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: hsl(var(--accent));
         }
 
         .step p {
-            color: var(--text-secondary);
+            color: hsl(var(--text-secondary));
+            font-size: 15px;
+            line-height: 1.6;
         }
 
         /* Testimonials */
         .testimonials {
-            padding: 100px 50px;
-            background: rgba(22, 33, 62, 0.4);
+            background: hsla(var(--bg-medium), 0.5);
+            padding: 120px 50px;
+        }
+
+        .testimonials-inner {
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
         .testimonials-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            max-width: 1400px;
-            margin: 60px auto 0;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
         }
 
         .testimonial-card {
-            background: rgba(22, 33, 62, 0.8);
-            padding: 40px;
-            border-radius: 20px;
-            border-left: 4px solid var(--accent);
+            background: hsla(var(--bg-card), 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid hsla(var(--primary), 0.15);
+            padding: 36px;
+            border-radius: 24px;
+            border-left: 4px solid hsl(var(--accent));
+            transition: all 0.3s ease;
         }
 
-        .testimonial-card p {
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px hsla(var(--primary), 0.15);
+        }
+
+        .quote-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+
+        .testimonial-card > p {
             font-size: 16px;
             line-height: 1.8;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
+            color: hsl(var(--text-secondary));
             font-style: italic;
-            color: var(--text-secondary);
         }
 
         .testimonial-author {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 16px;
         }
 
         .author-avatar {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
+            width: 52px;
+            height: 52px;
+            background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -374,55 +788,116 @@
 
         .author-info h4 {
             font-size: 16px;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
+            color: hsl(var(--text-light));
         }
 
         .author-info p {
             font-size: 14px;
-            color: var(--text-secondary);
+            color: hsl(var(--accent));
             margin: 0;
+            font-style: normal;
         }
 
         /* CTA Section */
         .cta-section {
-            padding: 100px 50px;
+            padding: 120px 50px;
             text-align: center;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(0, 212, 255, 0.1));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center, hsla(var(--primary), 0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
         .cta-section h2 {
-            font-size: 48px;
+            font-size: 52px;
             margin-bottom: 20px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-weight: 700;
         }
 
-        .cta-section p {
+        .cta-section > .cta-content > p {
             font-size: 20px;
-            color: var(--text-secondary);
+            color: hsl(var(--text-secondary));
             margin-bottom: 40px;
+            line-height: 1.7;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
         /* Footer */
         footer {
-            background: var(--bg-medium);
-            padding: 60px 50px 30px;
-            border-top: 1px solid rgba(102, 126, 234, 0.2);
+            background: hsl(var(--bg-medium));
+            padding: 80px 50px 40px;
+            border-top: 1px solid hsla(var(--primary), 0.15);
         }
 
         .footer-content {
             max-width: 1400px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand .logo {
+            margin-bottom: 20px;
+        }
+
+        .footer-brand p {
+            color: hsl(var(--text-secondary));
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-link {
+            width: 44px;
+            height: 44px;
+            background: hsla(var(--primary), 0.1);
+            border: 1px solid hsla(var(--primary), 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: hsl(var(--text-light));
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            background: hsla(var(--primary), 0.2);
+            border-color: hsl(var(--accent));
+            transform: translateY(-3px);
         }
 
         .footer-section h3 {
-            margin-bottom: 20px;
-            color: var(--accent);
+            font-size: 16px;
+            margin-bottom: 24px;
+            color: hsl(var(--accent));
         }
 
         .footer-section ul {
@@ -430,30 +905,103 @@
         }
 
         .footer-section ul li {
-            margin-bottom: 10px;
+            margin-bottom: 14px;
         }
 
         .footer-section a {
-            color: var(--text-secondary);
+            color: hsl(var(--text-secondary));
             text-decoration: none;
+            font-size: 15px;
             transition: color 0.3s;
         }
 
         .footer-section a:hover {
-            color: var(--accent);
+            color: hsl(var(--accent));
         }
 
         .footer-bottom {
             text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(102, 126, 234, 0.1);
-            color: var(--text-secondary);
+            padding-top: 40px;
+            border-top: 1px solid hsla(var(--primary), 0.1);
+            color: hsl(var(--text-secondary));
+            font-size: 14px;
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in-left {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .fade-in-right {
+            opacity: 0;
+            transform: translateX(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
         }
 
         /* Responsive */
+        @media (max-width: 1200px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 60px;
+                text-align: center;
+            }
+
+            .hero-content {
+                max-width: 700px;
+                margin: 0 auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .steps-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .steps-line {
+                display: none;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
         @media (max-width: 768px) {
             .hero h1 {
-                font-size: 40px;
+                font-size: 42px;
             }
 
             .hero p {
@@ -472,32 +1020,64 @@
                 display: none;
             }
 
-            .hero, .features, .how-it-works, .testimonials, .cta-section {
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .hero, .section, .testimonials, .cta-section {
+                padding: 80px 20px;
+            }
+
+            .stats {
                 padding: 60px 20px;
             }
-        }
 
-        /* Scroll animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
 
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .cta-section h2 {
+                font-size: 36px;
+            }
+
+            .floating-card {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="animated-bg"></div>
+    <div class="animated-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="grid-overlay"></div>
+    </div>
 
     <!-- Header -->
-    <header>
+    <header id="header">
         <nav>
             <div class="logo">
-                AI TeachMate
+                <div class="logo-icon">🎓</div>
+                <span class="text-gradient">AI TeachMate</span>
             </div>
             <ul class="nav-links">
                 <li><a href="#features">Features</a></li>
@@ -506,17 +1086,60 @@
                 <li><a href="#contact">Contact</a></li>
             </ul>
             <a href="#download" class="cta-btn">Download Now</a>
+            <button class="mobile-menu-btn" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </nav>
     </header>
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-content">
-            <h1>Transform Education with AI</h1>
-            <p>AI TeachMate brings personalized, interactive learning to every student with AI-powered avatars, voice interaction, and adaptive content.</p>
-            <div class="hero-buttons">
-                <a href="#download" class="primary-btn">Get Started Free</a>
-                <a href="#demo" class="secondary-btn">Watch Demo</a>
+        <div class="hero-container">
+            <div class="hero-content fade-in-left">
+                <div class="hero-badge">
+                    <span>✨</span> AI-Powered Education Platform
+                </div>
+                <h1>Transform Learning with <span class="text-gradient">AI TeachMate</span></h1>
+                <p>Experience personalized, interactive learning with AI-powered avatars, voice interaction, and adaptive content designed for Classes 5-10.</p>
+                <div class="hero-buttons">
+                    <a href="#download" class="primary-btn">
+                        <span>🚀</span> Get Started Free
+                    </a>
+                    <a href="#demo" class="secondary-btn">
+                        <span>▶️</span> Watch Demo
+                    </a>
+                </div>
+            </div>
+            <div class="hero-visual fade-in-right">
+                <div class="hero-card">
+                    <div class="avatar-container">
+                        <div class="avatar-circle">🤖</div>
+                        <div class="speaking-indicator">
+                            <div class="speaking-bar"></div>
+                            <div class="speaking-bar"></div>
+                            <div class="speaking-bar"></div>
+                            <div class="speaking-bar"></div>
+                            <div class="speaking-bar"></div>
+                        </div>
+                        <div class="topic-display">
+                            <p>Currently Teaching</p>
+                            <h3 class="text-gradient-accent">Photosynthesis in Plants</h3>
+                        </div>
+                        <div class="chat-bubble">
+                            <p>"Photosynthesis is the process by which green plants convert sunlight into energy. Let me explain the key steps..."</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="floating-card floating-card-1">
+                    <div class="floating-icon">🎯</div>
+                    <span>98% Accuracy</span>
+                </div>
+                <div class="floating-card floating-card-2">
+                    <div class="floating-icon">⚡</div>
+                    <span>Instant Answers</span>
+                </div>
             </div>
         </div>
     </section>
@@ -524,53 +1147,63 @@
     <!-- Stats Section -->
     <section class="stats">
         <div class="stats-grid">
-            <div class="stat-item">
-                <h3>New</h3>
+            <div class="stat-item fade-in">
+                <div class="stat-icon">🚀</div>
+                <h3 class="text-gradient">New</h3>
                 <p>Launching Soon</p>
             </div>
-            <div class="stat-item">
-                <h3>AI-Powered</h3>
+            <div class="stat-item fade-in">
+                <div class="stat-icon">🤖</div>
+                <h3 class="text-gradient">AI-Powered</h3>
                 <p>Next-Gen Learning</p>
             </div>
-            <div class="stat-item">
-                <h3>100%</h3>
+            <div class="stat-item fade-in">
+                <div class="stat-icon">💎</div>
+                <h3 class="text-gradient">100%</h3>
                 <p>Free to Start</p>
             </div>
-            <div class="stat-item">
-                <h3>5-10</h3>
+            <div class="stat-item fade-in">
+                <div class="stat-icon">📚</div>
+                <h3 class="text-gradient">5-10</h3>
                 <p>Classes Supported</p>
             </div>
         </div>
     </section>
 
     <!-- Features Section -->
-    <section class="features" id="features">
-        <h2 class="section-title">Powerful Features for Modern Learning</h2>
+    <section class="section" id="features">
+        <div class="section-header">
+            <div class="section-badge">
+                <span>⚡</span> Powerful Features
+            </div>
+            <h2 class="section-title text-gradient">Everything You Need to Excel</h2>
+            <p class="section-desc">AI TeachMate combines cutting-edge technology with proven educational methods to create an unparalleled learning experience.</p>
+        </div>
         <div class="features-grid">
             <div class="feature-card fade-in">
                 <div class="feature-icon">🎙️</div>
                 <h3>Voice-Powered Learning</h3>
-                <p>Ask questions naturally using your voice. Our advanced speech recognition understands student queries and provides instant answers.</p>
+                <p>Ask questions naturally using your voice. Our advanced speech recognition understands student queries and provides instant, accurate answers.</p>
             </div>
             <div class="feature-card fade-in">
                 <div class="feature-icon">🤖</div>
                 <h3>AI Avatar Teacher</h3>
-                <p>Engaging 3D avatar brings lessons to life with realistic animations, gestures, and expressions that keep students focused.</p>
+                <p>Engaging 3D avatar brings lessons to life with realistic animations, gestures, and expressions that keep students focused and engaged.</p>
             </div>
             <div class="feature-card fade-in">
                 <div class="feature-icon">📚</div>
                 <h3>Curriculum-Aligned Content</h3>
-                <p>Covers Class 5-10 syllabi for English, Maths, Science, and Social Studies with subject-specific explanations.</p>
+                <p>Covers Class 5-10 syllabi for English, Maths, Science, and Social Studies with subject-specific explanations and examples.</p>
             </div>
             <div class="feature-card fade-in">
                 <div class="feature-icon">🎯</div>
                 <h3>Personalized Learning</h3>
-                <p>Adaptive content adjusts to each student's pace and understanding level, ensuring optimal learning outcomes.</p>
+                <p>Adaptive content adjusts to each student's pace and understanding level, ensuring optimal learning outcomes for everyone.</p>
             </div>
             <div class="feature-card fade-in">
                 <div class="feature-icon">📝</div>
                 <h3>Smart Note-Taking</h3>
-                <p>Automatic note generation with manual editing capabilities. Save and export notes for future reference.</p>
+                <p>Automatic note generation with manual editing capabilities. Save and export notes for future reference and revision.</p>
             </div>
             <div class="feature-card fade-in">
                 <div class="feature-icon">🏆</div>
@@ -580,79 +1213,107 @@
             <div class="feature-card fade-in">
                 <div class="feature-icon">💡</div>
                 <h3>Smart Suggestions</h3>
-                <p>AI-powered topic recommendations based on learning history, class, and subject to guide student exploration.</p>
+                <p>AI-powered topic recommendations based on learning history, class, and subject to guide student exploration effectively.</p>
             </div>
             <div class="feature-card fade-in">
                 <div class="feature-icon">🔊</div>
                 <h3>Text-to-Speech</h3>
-                <p>Natural voice synthesis with adjustable speed for different subjects. Pause, resume, and replay content easily.</p>
+                <p>Natural voice synthesis with adjustable speed for different subjects. Pause, resume, and replay content anytime.</p>
             </div>
             <div class="feature-card fade-in">
                 <div class="feature-icon">🎨</div>
-                <h3>Subject-Specific Formatting</h3>
-                <p>Maths formulas, chemistry reactions, and physics equations are highlighted and explained step-by-step.</p>
+                <h3>Visual Formatting</h3>
+                <p>Maths formulas, chemistry reactions, and physics equations are highlighted and explained step-by-step with visual aids.</p>
             </div>
         </div>
     </section>
 
     <!-- How It Works -->
-    <section class="how-it-works" id="how-it-works">
-        <h2 class="section-title">How It Works</h2>
-        <div class="steps">
-            <div class="step fade-in">
-                <div class="step-number">1</div>
-                <h3>Select Your Class & Subject</h3>
-                <p>Choose from Classes 5-10 and pick your subject: English, Maths, Science, or Social Studies.</p>
+    <section class="section" id="how-it-works">
+        <div class="section-header">
+            <div class="section-badge">
+                <span>🎯</span> Simple Process
             </div>
-            <div class="step fade-in">
-                <div class="step-number">2</div>
-                <h3>Enter a Topic</h3>
-                <p>Type or select from smart suggestions based on your curriculum and learning history.</p>
-            </div>
-            <div class="step fade-in">
-                <div class="step-number">3</div>
-                <h3>Learn Interactively</h3>
-                <p>Watch the AI avatar explain concepts while content displays on screen. Take notes automatically.</p>
-            </div>
-            <div class="step fade-in">
-                <div class="step-number">4</div>
-                <h3>Ask Questions Anytime</h3>
-                <p>Use voice or text to ask questions. Get instant, contextual answers without interrupting the flow.</p>
+            <h2 class="section-title text-gradient">How It Works</h2>
+            <p class="section-desc">Get started in minutes with our intuitive learning platform designed for students of all levels.</p>
+        </div>
+        <div class="steps-container">
+            <div class="steps-line"></div>
+            <div class="steps-grid">
+                <div class="step fade-in">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Select Your Class & Subject</h3>
+                        <p>Choose from Classes 5-10 and pick your subject: English, Maths, Science, or Social Studies.</p>
+                    </div>
+                </div>
+                <div class="step fade-in">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Enter a Topic</h3>
+                        <p>Type or select from smart suggestions based on your curriculum and learning history.</p>
+                    </div>
+                </div>
+                <div class="step fade-in">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Learn Interactively</h3>
+                        <p>Watch the AI avatar explain concepts while content displays on screen. Take notes automatically.</p>
+                    </div>
+                </div>
+                <div class="step fade-in">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Ask Questions</h3>
+                        <p>Use voice or text to ask questions. Get instant, contextual answers without interrupting the flow.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Testimonials -->
     <section class="testimonials" id="testimonials">
-        <h2 class="section-title">Early Access Feedback</h2>
-        <div class="testimonials-grid">
-            <div class="testimonial-card fade-in">
-                <p>"AI TeachMate represents the future of personalized education. The combination of AI avatars and voice interaction creates an engaging learning environment that traditional methods can't match."</p>
-                <div class="testimonial-author">
-                    <div class="author-avatar">👨‍💻</div>
-                    <div class="author-info">
-                        <h4>DSR Sridhar Dornadula</h4>
-                        <p>Creator & Lead Developer</p>
+        <div class="testimonials-inner">
+            <div class="section-header">
+                <div class="section-badge">
+                    <span>💬</span> Testimonials
+                </div>
+                <h2 class="section-title text-gradient">Early Access Feedback</h2>
+                <p class="section-desc">See what our early adopters and beta testers have to say about AI TeachMate.</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card fade-in">
+                    <div class="quote-icon">"</div>
+                    <p>AI TeachMate represents the future of personalized education. The combination of AI avatars and voice interaction creates an engaging learning environment that traditional methods can't match.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">👨‍💻</div>
+                        <div class="author-info">
+                            <h4>DSR Sridhar Dornadula</h4>
+                            <p>Creator & Lead Developer</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="testimonial-card fade-in">
-                <p>"The adaptive learning approach and instant doubt clearing make this a powerful tool for students who need flexible, self-paced education. Excited to see the impact it will have."</p>
-                <div class="testimonial-author">
-                    <div class="author-avatar">🎓</div>
-                    <div class="author-info">
-                        <h4>Beta Testing Team</h4>
-                        <p>Educational Technology Experts</p>
+                <div class="testimonial-card fade-in">
+                    <div class="quote-icon">"</div>
+                    <p>The adaptive learning approach and instant doubt clearing make this a powerful tool for students who need flexible, self-paced education. Excited to see the impact it will have.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">🎓</div>
+                        <div class="author-info">
+                            <h4>Beta Testing Team</h4>
+                            <p>Educational Technology Experts</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="testimonial-card fade-in">
-                <p>"Voice-powered learning combined with visual AI avatars creates an immersive experience. The curriculum alignment for Classes 5-10 makes it immediately useful for students across grade levels."</p>
-                <div class="testimonial-author">
-                    <div class="author-avatar">🔬</div>
-                    <div class="author-info">
-                        <h4>Early Adopters</h4>
-                        <p>Test Users & Educators</p>
+                <div class="testimonial-card fade-in">
+                    <div class="quote-icon">"</div>
+                    <p>Voice-powered learning combined with visual AI avatars creates an immersive experience. The curriculum alignment for Classes 5-10 makes it immediately useful for students.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">🔬</div>
+                        <div class="author-info">
+                            <h4>Early Adopters</h4>
+                            <p>Test Users & Educators</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -661,20 +1322,36 @@
 
     <!-- CTA Section -->
     <section class="cta-section" id="download">
-        <h2>Ready to Transform Your Learning Experience?</h2>
-        <p>Join thousands of students already learning smarter with AI TeachMate</p>
-        <div class="hero-buttons">
-            <a href="#" class="primary-btn">Download for Windows</a>
-            <a href="#" class="secondary-btn">Request Demo</a>
+        <div class="cta-content fade-in">
+            <h2><span class="text-gradient">Ready to Transform</span> Your Learning?</h2>
+            <p>Join thousands of students already learning smarter with AI TeachMate. Start your journey to academic excellence today.</p>
+            <div class="cta-buttons">
+                <a href="#" class="primary-btn">
+                    <span>💻</span> Download for Windows
+                </a>
+                <a href="#" class="secondary-btn">
+                    <span>📧</span> Request Demo
+                </a>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer id="contact">
         <div class="footer-content">
-            <div class="footer-section">
-                <h3>AI TeachMate</h3>
-                <p>Your AI Learning Companion<br>Created by DSR Sridhar Dornadula</p>
+            <div class="footer-brand">
+                <div class="logo">
+                    <div class="logo-icon">🎓</div>
+                    <span class="text-gradient">AI TeachMate</span>
+                </div>
+                <p>Your AI Learning Companion. Revolutionizing education with voice-powered, personalized learning experiences for Classes 5-10.</p>
+                <p><strong>Created by DSR Sridhar Dornadula</strong></p>
+                <div class="social-links">
+                    <a href="#" class="social-link" aria-label="GitHub">📦</a>
+                    <a href="#" class="social-link" aria-label="LinkedIn">💼</a>
+                    <a href="#" class="social-link" aria-label="Twitter">🐦</a>
+                    <a href="#" class="social-link" aria-label="YouTube">📺</a>
+                </div>
             </div>
             <div class="footer-section">
                 <h3>Product</h3>
@@ -695,12 +1372,12 @@
                 </ul>
             </div>
             <div class="footer-section">
-                <h3>Connect</h3>
+                <h3>Resources</h3>
                 <ul>
-                    <li><a href="#">GitHub</a></li>
-                    <li><a href="#">LinkedIn</a></li>
-                    <li><a href="#">Twitter</a></li>
-                    <li><a href="#">YouTube</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Community</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
                 </ul>
             </div>
         </div>
@@ -728,28 +1405,37 @@
         };
 
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
+            entries.forEach((entry, index) => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 100);
                 }
             });
         }, observerOptions);
 
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right').forEach(el => observer.observe(el));
 
         // Header scroll effect
-        let lastScroll = 0;
         window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            const currentScroll = window.pageYOffset;
-            
-            if (currentScroll > 100) {
-                header.style.padding = '15px 50px';
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
             } else {
-                header.style.padding = '20px 50px';
+                header.classList.remove('scrolled');
             }
+        });
+
+        // Parallax effect for orbs
+        document.addEventListener('mousemove', (e) => {
+            const orbs = document.querySelectorAll('.orb');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
             
-            lastScroll = currentScroll;
+            orbs.forEach((orb, index) => {
+                const speed = (index + 1) * 10;
+                orb.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
+            });
         });
     </script>
 </body>
